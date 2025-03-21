@@ -32,29 +32,28 @@ public class HelloController {
                 tfWorked.setText(String.valueOf(t1.hours));
                 tfWage.setText(String.valueOf(t1.wage));
                 lblSalary.setText("Salary: $" + String.format("%.2f",t1.Salary()));
-                System.out.println(t1);
                 curr = t1;
-                try(Connection connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-                    Statement statement = connection.createStatement()){
-                    String query = "Select * FROM company";
-                    ResultSet resultSet = statement.executeQuery(query);
-                    int i = 1;
-                    while(resultSet.next()){
-                        String name = resultSet.getString("name");
-                        int hoursworked  = Integer.parseInt(resultSet.getString("hoursworked"));
-                        if(curr.name == name && curr.hours == hoursworked){
-                            return;
-                        }
-                        i++;
-                    }
-                    int x = 0;
-                    do{
-                        x++;
-                        currId = resultSet.getInt("id");
-                    }while(x != i);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+//                try(Connection connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+//                    Statement statement = connection.createStatement()){
+//                    String query = "Select * FROM company1";
+//                    ResultSet resultSet = statement.executeQuery(query);
+//                    int i = 1;
+//                    while(resultSet.next()){
+//                        String name = resultSet.getString("name");
+//                        int hoursworked  = Integer.parseInt(resultSet.getString("hours"));
+//                        if(curr.name == name && curr.hours == hoursworked){
+//                            return;
+//                        }
+//                        i++;
+//                    }
+//                    int x = 0;
+//                    do{
+//                        x++;
+//                        currId = resultSet.getInt("id");
+//                    }while(x != i);
+//                } catch (SQLException e) {
+//                    throw new RuntimeException(e);
+//                }
             }
         });
     }
@@ -68,7 +67,7 @@ public class HelloController {
             Employee e = new Employee(name,hours,wage);
             lvList.getItems().add(e);
             try(Connection connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-                PreparedStatement statement = connection.prepareStatement("INSERT INTO company (name,hoursworked,wage,salary) VALUES (?,?,?,?)")) {
+                PreparedStatement statement = connection.prepareStatement("INSERT INTO company1 (name,hours,wage,salary) VALUES (?,?,?,?)")) {
 
                 statement.setString(1,name);
                 statement.setString(2,String.valueOf(hours));
@@ -81,6 +80,7 @@ public class HelloController {
                     System.out.println("Inserted successfully");
                 }
             } catch (SQLException E) {
+                System.out.println("Problem");
                 throw new RuntimeException(E);
             }
         }else{
@@ -88,7 +88,7 @@ public class HelloController {
             curr.wage = wage;
             curr.hours = hours;
             try(Connection connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-                PreparedStatement statement = connection.prepareStatement("UPDATE company SET name=?, hoursworked=?, wage=?, salary=? WHERE id=?")) {
+                PreparedStatement statement = connection.prepareStatement("UPDATE company1 SET name=?, hours=?, wage=?, salary=? WHERE id=?")) {
 
                 statement.setString(1,curr.name);
                 statement.setString(2,String.valueOf(curr.hours));
@@ -128,21 +128,23 @@ public class HelloController {
             return;
         }
         loaded = true;
+        lvList.getItems().clear();
         try(Connection connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
             Statement statement = connection.createStatement()){
-            String query = "Select * FROM company";
+            String query = "Select * FROM company1";
             ResultSet resultSet = statement.executeQuery(query);
             while(resultSet.next()){
                 String name = resultSet.getString("name");
                 int id = resultSet.getInt("id");
-                int hoursworked  = Integer.parseInt(resultSet.getString("hoursworked"));
+                int hoursworked  = Integer.parseInt(resultSet.getString("hours"));
                 int wage  = Integer.parseInt(resultSet.getString("wage"));
                 int salary = hoursworked * wage;
-                System.out.println("[" + id + "] " + name + " - Hours worked: " + hoursworked + " - Wage: " + wage + " Salary: " + salary);
+                System.out.println("[" + id + "] " + name + " | Hours worked: " + hoursworked + " | Wage: " + wage + "| Salary: " + salary);
                 Employee e = new Employee(name, hoursworked, wage);
                 lvList.getItems().add(e);
             }
         } catch (SQLException e) {
+            System.out.println("Problem");
             throw new RuntimeException(e);
         }
     }

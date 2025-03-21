@@ -11,7 +11,7 @@ public class InsertData {
     public static final String PASSWORD = "";
     public static void main(String[] args) {
         try(Connection connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO company (name,hoursworked,wage,salary) VALUES (?,?,?,?)")) {
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO company1 (name,hoursworked,wage,salary) VALUES (?,?,?,?)")) {
 
             statement.setString(1,"JM");
             statement.setString(2,String.valueOf(5));

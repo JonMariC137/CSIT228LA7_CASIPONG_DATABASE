@@ -14,7 +14,7 @@ public class CreateTable {
         try {
             connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
             System.out.println("Database connection successful");
-            String query = "CREATE TABLE `csit228f1`.`company` (`id` INT NOT NULL AUTO_INCREMENT , `name` INT NOT NULL , `hoursworked` INT NOT NULL , `wage` INT NOT NULL , `salary` INT NOT NULL , PRIMARY KEY (`id`))";
+            String query = "CREATE TABLE `csit228f1`.`company1` (`id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(50) NOT NULL , `hours` INT NOT NULL , `wage` INT NOT NULL , `salary` INT NOT NULL , PRIMARY KEY (`id`)) ";
             Statement statement = connection.createStatement();
             statement.execute(query);
             System.out.println("Table created successfully");
