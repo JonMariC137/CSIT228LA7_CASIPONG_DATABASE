@@ -85,7 +85,6 @@ public class HelloController {
                     System.out.println("Inserted successfully");
                 }
             } catch (SQLException E) {
-                System.out.println("Problem");
                 throw new RuntimeException(E);
             }
         }else{
@@ -105,6 +104,7 @@ public class HelloController {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+            System.out.println("Updated successfully!");
         }
     }
 
@@ -150,6 +150,21 @@ public class HelloController {
             }
         } catch (SQLException e) {
             System.out.println("Problem");
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void onDeleteClicked(ActionEvent actionEvent) {
+        lvList.getItems().remove(curr);
+        try(Connection connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM company1 WHERE id=?")) {
+            statement.setInt(1,currId+1);
+            int rowsAffected = statement.executeUpdate();
+
+            if(rowsAffected > 0){
+                System.out.println("Deleted successfully");
+            }
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
