@@ -9,6 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 import java.sql.*;
+import java.util.Objects;
 
 public class HelloController {
     public TextField tfWage;
@@ -22,7 +23,7 @@ public class HelloController {
     public static final String USERNAME = "root";
     public static final String PASSWORD = "";
     public boolean loaded = false;
-    public int currId;
+    public int currId = 0;
     @FXML
     public void initialize(){
         lvList.getFocusModel().focusedItemProperty().addListener(new ChangeListener<Employee>() {
@@ -33,27 +34,31 @@ public class HelloController {
                 tfWage.setText(String.valueOf(t1.wage));
                 lblSalary.setText("Salary: $" + String.format("%.2f",t1.Salary()));
                 curr = t1;
-//                try(Connection connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-//                    Statement statement = connection.createStatement()){
-//                    String query = "Select * FROM company1";
-//                    ResultSet resultSet = statement.executeQuery(query);
-//                    int i = 1;
-//                    while(resultSet.next()){
-//                        String name = resultSet.getString("name");
-//                        int hoursworked  = Integer.parseInt(resultSet.getString("hours"));
-//                        if(curr.name == name && curr.hours == hoursworked){
-//                            return;
-//                        }
-//                        i++;
-//                    }
-//                    int x = 0;
-//                    do{
-//                        x++;
-//                        currId = resultSet.getInt("id");
-//                    }while(x != i);
-//                } catch (SQLException e) {
-//                    throw new RuntimeException(e);
-//                }
+                try(Connection connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+                    Statement statement = connection.createStatement()){
+                    String query = "Select * FROM company1";
+                    ResultSet resultSet = statement.executeQuery(query);
+                    int i = 1;
+                    while(resultSet.next()){
+                        String name = resultSet.getString("name");
+                        int hoursworked  = Integer.parseInt(resultSet.getString("hours"));
+                        if(Objects.equals(curr.name, name) && curr.hours == hoursworked){
+                            break;
+                        }
+                        i++;
+                    }
+                    int x = 0;
+                    do{
+                        x++;
+                        if(x==i){
+                            currId = resultSet.getInt("id");
+                            break;
+                        }
+                    }while(true);
+                    System.out.println(currId);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
     }
