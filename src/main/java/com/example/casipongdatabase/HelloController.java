@@ -4,10 +4,15 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.Objects;
 
@@ -24,6 +29,8 @@ public class HelloController {
     public static final String PASSWORD = "";
     public boolean loaded = false;
     public int currId = 0;
+    public Pane pHome;
+
     @FXML
     public void initialize(){
         lvList.getFocusModel().focusedItemProperty().addListener(new ChangeListener<Employee>() {
@@ -167,5 +174,19 @@ public class HelloController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void onBackClicked(ActionEvent actionEvent) throws IOException {
+        switchScene("login-view.fxml", "Login");
+    }
+
+    private void switchScene(String fxmlFile, String title) throws IOException {
+        Stage stage = (Stage) pHome.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
+        Scene scene = new Scene(fxmlLoader.load(), 320, 740);
+
+        stage.setTitle(title);
+        stage.setScene(scene);
+        stage.show(); // Ensure scene is shown properly
     }
 }
