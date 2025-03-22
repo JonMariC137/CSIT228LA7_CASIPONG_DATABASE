@@ -182,7 +182,7 @@ public class HelloController {
     private void switchScene(String fxmlFile, String title) throws IOException {
         Stage stage = (Stage) pHome.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 740);
+        Scene scene = new Scene(fxmlLoader.load(), 320, 350);
 
         stage.setTitle(title);
         stage.setScene(scene);
