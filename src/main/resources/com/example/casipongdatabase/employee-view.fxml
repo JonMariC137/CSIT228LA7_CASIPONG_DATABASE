@@ -1,14 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.casipongdatabase.EmployeeView"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<VBox fx:id="pHome" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="332.0" prefWidth="522.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.casipongdatabase.EmployeeView">
+    <children>
+        <GridPane alignment="CENTER" prefHeight="186.0" prefWidth="500.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.0" minWidth="10.0" prefWidth="124.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="328.0" minWidth="10.0" prefWidth="312.2" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="288.0" minWidth="10.0" prefWidth="124.99999999999994" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <VBox.margin>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="100.0" />
+            </VBox.margin>
+            <children>
+                <Label fx:id="lblName" alignment="CENTER" prefHeight="63.0" prefWidth="522.0" text="Text" textAlignment="CENTER" GridPane.columnIndex="1">
+                    <font>
+                        <Font name="Bell MT" size="28.0" />
+                    </font>
+                </Label>
+                <Button fx:id="btnSave" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onSaveClicked" prefHeight="26.0" prefWidth="308.0" text="Save" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </GridPane.margin>
+                </Button>
+                <TextField fx:id="hours" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin></TextField>
+                <Button fx:id="btnBack" mnemonicParsing="false" onAction="#onBackButttonClicked" prefHeight="43.0" prefWidth="291.0" text="Back" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin></Button>
+            <Label alignment="CENTER" prefHeight="18.0" prefWidth="311.0" text="Hours Worked" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            </children>
+        </GridPane>
+    </children>
+</VBox>

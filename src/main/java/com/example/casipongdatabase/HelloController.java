@@ -156,7 +156,6 @@ public class HelloController {
                 lvList.getItems().add(e);
             }
         } catch (SQLException e) {
-            System.out.println("Problem");
             throw new RuntimeException(e);
         }
     }
