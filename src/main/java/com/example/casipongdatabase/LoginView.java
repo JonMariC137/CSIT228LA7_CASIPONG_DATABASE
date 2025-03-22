@@ -1,6 +1,5 @@
 package com.example.casipongdatabase;
 
-import com.mysql.cj.protocol.Resultset; // Required as per your environment
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -30,7 +29,7 @@ public class LoginView {
     @FXML
     private void goToEmployee(ActionEvent actionEvent) throws IOException {
         String name = tfName.getText();
-        String hours = null; // Store retrieved data
+        String hours = null;
         int id, wage;
         try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM company1 WHERE name = ?")) {
@@ -40,7 +39,7 @@ public class LoginView {
 
             if (rs.next()) {
                 System.out.println("User Found!");
-                hours = rs.getString("hours"); // Store the value before closing the connection
+                hours = rs.getString("hours");
                 id = Integer.parseInt(rs.getString("id"));
                 wage = Integer.parseInt(rs.getString("wage"));
             } else {
@@ -51,7 +50,6 @@ public class LoginView {
             throw new RuntimeException(e);
         }
 
-        // Load new scene
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("employee-view.fxml"));
         Stage stage = (Stage) pHome.getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load(), 320, 350);
@@ -59,9 +57,8 @@ public class LoginView {
         stage.setTitle("Employee");
         stage.show();
 
-        // Get controller and pass stored data
         EmployeeView employeeView = fxmlLoader.getController();
-        employeeView.setData(id,name,hours,wage); // Pass the retrieved value
+        employeeView.setData(id,name,hours,wage);
     }
 
     private void switchScene(String fxmlFile, String title) throws IOException {

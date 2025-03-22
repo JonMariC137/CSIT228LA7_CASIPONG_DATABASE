@@ -186,6 +186,6 @@ public class HelloController {
 
         stage.setTitle(title);
         stage.setScene(scene);
-        stage.show(); // Ensure scene is shown properly
+        stage.show(); 
     }
 }

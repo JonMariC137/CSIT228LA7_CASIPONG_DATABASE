@@ -19,11 +19,11 @@ public class EmployeeView {
     public static final String USERNAME = "root";
     public static final String PASSWORD = "";
     @FXML
-    private ResultSet RS; // Corrected to java.sql.ResultSet
+    private ResultSet RS;
     @FXML
     private Label lblName;
     @FXML
-    private TextField hours; // Ensure this is linked in FXML
+    private TextField hours;
 
     @FXML
     private Pane pHome;
@@ -33,7 +33,6 @@ public class EmployeeView {
     private int hoursVal;
 
     public void onSaveClicked(ActionEvent actionEvent) {
-        // Implement save functionality
         try(Connection connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
             PreparedStatement statement = connection.prepareStatement("UPDATE company1 SET hours=?, salary=? WHERE id=?")) {
 
@@ -69,6 +68,6 @@ public class EmployeeView {
 
         stage.setTitle(title);
         stage.setScene(scene);
-        stage.show(); // Ensure scene is shown properly
+        stage.show();
     }
 }
